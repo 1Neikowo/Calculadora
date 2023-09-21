@@ -2,7 +2,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 public class Calculadora {
     public static void main(String args[]) {
-        Scanner sc = new Scanner(System.in);
+         Scanner sc = new Scanner(System.in);
         double[] a = new double[2];
         double[] b = new double[2];
         boolean valorvalido = false;
@@ -23,10 +23,8 @@ public class Calculadora {
                 b[0] = sc.nextDouble();
                 System.out.println("Ingrese la coordenada y: ");
                 b[1] = sc.nextDouble();
+                validacionpuntos( a,  b);
                 valorvalido = true;
-                if (a[0] == b[0] && a[1] == b[1]) {
-                    throw new ArithmeticException("Los puntos no pueden ser iguales");
-                }
                 ecuacionRecta(a, b);
 
             } catch (ArithmeticException e) {
@@ -61,11 +59,18 @@ public class Calculadora {
         valorvalido2 = false;
 
     }
+
     public static void ecuacionRecta ( double[] a, double[] b){
         double m = (b[1] - a[1]) / (b[0] - a[0]);
         double coeficiente = m * (-a[0]) + a[1];
         System.out.println("La ecuación de la recta es: Y = " + m + "x +" + coeficiente);
 
+    }
+    public static ArithmeticException validacionpuntos(double [] a, double[] b){
+        if (a[0] == b[0]) {
+            throw new ArithmeticException("Los puntos no pueden ser iguales");
+        }
+        return null;
     }
 }
 
