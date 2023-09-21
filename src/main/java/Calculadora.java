@@ -222,8 +222,11 @@ public class Calculadora {
         return a * b;
     }
     public static double divi ( double a, double b){
-
-        return a / b;
+        if (b == 0) {
+            throw new ArithmeticException("El denominador no puede ser 0");
+        }else {
+            return a / b;
+        }
 
     }
     public static ArithmeticException validaciondenominador ( double b) {
