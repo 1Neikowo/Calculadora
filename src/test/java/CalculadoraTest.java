@@ -1,55 +1,97 @@
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.Test;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CalculadoraTest {
-
-    @Test
-    void suma() {
-        assertEquals(3.2, Calculadora.suma(1, 2.2));
-        assertEquals(1000, Calculadora.suma(-1000, 2000));
-    }
-    @Test
-    void resta() {
-        assertEquals(-1, Calculadora.resta(1, 2));
-        assertNotEquals(5, Calculadora.resta(5, 2));
+  
+    @org.junit.jupiter.api.Test
+      
+    void perimetroCuadrado() {
+        assertEquals(8, Calculadora.perimetroCuadrado(2));
+        assertNotEquals(8, Calculadora.perimetroCuadrado(3));
     }
 
-    @Test
-    void multi() {
-        assertEquals(20000000, Calculadora.multi(10000000, 2));
-        assertNotEquals(1000, Calculadora.multi(-1000, 2000));
-        assertEquals(1000, Calculadora.multi(2000, 0.5));
+    @org.junit.jupiter.api.Test
+    void areaCuadrado() {
+        assertEquals(4, Calculadora.areaCuadrado(2));
+        assertNotEquals(4, Calculadora.areaCuadrado(3));
+    }
+
+    @org.junit.jupiter.api.Test
+    void perimetroRectangulo() {
+        assertEquals(8, Calculadora.perimetroRectangulo(2, 2));
+        assertNotEquals(4, Calculadora.perimetroRectangulo(3, 3));
+    }
+
+    @org.junit.jupiter.api.Test
+    void areaRectangulo() {
+        assertEquals(4, Calculadora.areaRectangulo(2, 2));
+        assertNotEquals(4, Calculadora.areaRectangulo(3, 3));
+    }
+
+    @org.junit.jupiter.api.Test
+    void circunferenciaCirculo() {
+        assertEquals(Math.PI*2, Calculadora.circunferenciaCirculo(1));
+        assertNotEquals(Math.PI, Calculadora.circunferenciaCirculo(3));
+    }
+
+    @org.junit.jupiter.api.Test
+    void areaCirculo() {
+        assertEquals(Math.PI, Calculadora.areaCirculo(1));
+        assertNotEquals(Math.PI*2, Calculadora.areaCirculo(3));
+    }
+
+    @org.junit.jupiter.api.Test
+    void areaEsfera() {
+        assertEquals(Math.PI*4, Calculadora.areaEsfera(1));
+        assertNotEquals(Math.PI*2, Calculadora.areaEsfera(3));
+    }
+
+    @org.junit.jupiter.api.Test
+    void volumenEsfera() {
+        assertEquals((double) 4 /3*Math.PI, Calculadora.volumenEsfera(1));
+        assertNotEquals(Math.PI, Calculadora.volumenEsfera(2));
+    }
+
+    @org.junit.jupiter.api.Test
+    void areaCubo() {
+        assertEquals(24, Calculadora.areaCubo(2));
+        assertNotEquals(30, Calculadora.areaCubo(3));
+    }
+
+    @org.junit.jupiter.api.Test
+    void volumenCubo() {
+        assertEquals(8, Calculadora.volumenCubo(2));
+        assertNotEquals(10, Calculadora.volumenCubo(3));
+    }
+
+    @org.junit.jupiter.api.Test
+    void areaCono() {
+        assertEquals(24*Math.PI, Calculadora.areaCono(3,4));
+        assertNotEquals(30, Calculadora.areaCono(3,3));
+    }
+
+    @org.junit.jupiter.api.Test
+    void volumenCono() {
+        assertEquals(12*Math.PI, Calculadora.volumenCono(3,4));
+        assertNotEquals(10, Calculadora.volumenCono(3,3));
     }
 
     @Test
-    void divi() {
-        assertEquals(500, Calculadora.divi(1000, 2));
-        assertThrows(ArithmeticException.class, () -> Calculadora.divi(1000,0));
+    public void calcularCuadratica1Test() {
+        double x1 = Calculadora.calcularCuadratica1(0, 1.0, -3.0, 2.0, 1.0);
+        assertEquals(2.0, x1, 0.0001); // Verifica que el cálculo de la primera raíz sea correcto
     }
 
     @Test
-    void max() {
-        assertEquals(2000, Calculadora.max(1000, 2000));
-        assertNotEquals(-2000, Calculadora.max(-2000, 1000));
+    public void calcularCuadratica2Test() {
+        double x2 = Calculadora.calcularCuadratica2(0, 1.0, -3.0, 2.0, 1.0);
+        assertEquals(1.0, x2, 0.0001); // Verifica que el cálculo de la segunda raíz sea correcto
     }
 
-    @Test
-    void min() {
-        assertEquals(-2000, Calculadora.min(-2000, 1000));
-        assertNotEquals(2000, Calculadora.min(2000, -1000));
-    }
 
-    @Test
-    void power() {
-        assertEquals(1, Calculadora.power(1000,0));
-        assertEquals(0.5, Calculadora.power(2,-1));
-        assertEquals(25, Calculadora.power(5,2));
-    }
-
-    @Test
-    void percentage() {
-        assertEquals(50, Calculadora.percentage(100, 50));
-        assertEquals(0, Calculadora.percentage(100, 0));
-    }
 }
+
