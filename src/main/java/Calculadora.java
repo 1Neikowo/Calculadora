@@ -2,7 +2,10 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 public class Calculadora {
     public static void main(String args[]) {
-         Scanner sc = new Scanner(System.in);
+        ejecutar();
+    }
+    public static void ejecutar(){
+        Scanner sc = new Scanner(System.in);
         double[] a = new double[2];
         double[] b = new double[2];
         boolean valorvalido = false;
@@ -57,6 +60,7 @@ public class Calculadora {
             }
         }while(!valorvalido2);
         valorvalido2 = false;
+
 
     }
 
