@@ -4,7 +4,26 @@ import static java.lang.Math.sqrt;
 
 public class Calculadora {
     public static void main(String[] args) {
-        menu();
+
+        menuPrincipal();
+    }
+    public static void menuPrincipal(){
+        System.out.println("Que desea hacer");
+        System.out.println("[1] Figuras]");
+        System.out.println("[2] Calculo recta");
+        Scanner teclado = new Scanner(System.in);
+        int opcion = teclado.nextInt();
+        switch (opcion) {
+            case 1:
+                menu();
+                break;
+            case 2:
+                ejecutar();
+                break;
+            default:
+                System.out.println("Opcion no valida");
+                break;
+        }
     }
 
     public static double perimetroCuadrado(double lado) {
@@ -107,7 +126,7 @@ public class Calculadora {
         menu();
     }
     public static void llamarMetodos(int opcion) {
-        double lado , base, altura, radio;
+        double lado, base, altura, radio;
         switch (opcion) {
             case 1:
                 System.out.println("Ingrese el lado del cuadrado: ");
@@ -178,15 +197,16 @@ public class Calculadora {
                 System.out.println("El volumen del cono es: " + volumenCono(radio, altura));
                 break;
             case 13:
-                System.out.println("Saliendo...");
-                System.exit(0);
+                menuPrincipal();
                 break;
             default:
                 System.out.println("Opción no válida");
                 break;
         }
+    }
 
     public static void ejecutar(){
+        System.out.println("Ingrese los valores de las variables de una ecuacion cuadratica de la manera ax^2+bx+c");
         double a = 0;
         double b = 0;
         double c = 0;
@@ -206,6 +226,7 @@ public class Calculadora {
             x1 = calcularCuadratica1(x1, a, b, c, discriminante);
             mostrarUnResultado(x1);
         }
+        menuPrincipal();
     }
 
     public static double ingresarA(double a){
