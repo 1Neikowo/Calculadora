@@ -4,6 +4,10 @@ import java.util.Scanner;
 public class Calculadora {
   
     public static void main(String[] args){
+        ejecutar();
+
+    }
+    public static void ejecutar(){
         Scanner sc = new Scanner(System.in);
         int opcion=0;
         double numerador=1;
@@ -208,7 +212,6 @@ public class Calculadora {
         System.out.println("8. Porcentaje");
         System.out.println("9. Salir");
     }
-
     public static double suma ( double a, double b){
 
         return a + b;
