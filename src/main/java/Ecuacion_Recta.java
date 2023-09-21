@@ -9,31 +9,36 @@ public class Ecuacion_Recta {
         boolean valorvalido = false;
         String respuesta;
         String entrada;
-        try {
+        do {
             System.out.println("Bienvenido/a a la Calculadora de Ecuaciones de Recta");
-            System.out.println("Ingrese las coordenadas del primer punto");
-            System.out.println("Ingrese la coordenada x: ");
-            a[0] = sc.nextDouble();
-            System.out.println("Ingrese la coordenada y: ");
-            a[1] = sc.nextDouble();
-            System.out.println("Ingrese las coordenadas del segundo punto");
-            System.out.println("Ingrese la coordenada x: ");
-            b[0] = sc.nextDouble();
-            System.out.println("Ingrese la coordenada y: ");
-            b[1] = sc.nextDouble();
-            valorvalido = true;
-            if (a[0] == b[0] && a[1] == b[1]) {
-                throw new ArithmeticException("Los puntos no pueden ser iguales");
-            }
-            ecuacionRecta(a, b);
+            try {
 
-        }catch(ArithmeticException e) {
-            System.err.println(e.getMessage());
-            sc.nextLine();
-        }catch(InputMismatchException e){
-            System.err.println("Ingresa valores double para las coordenadas de los puntos");
-            sc.nextLine();
-        }
+                System.out.println("Ingrese las coordenadas del primer punto");
+                System.out.println("Ingrese la coordenada x: ");
+                a[0] = sc.nextDouble();
+                System.out.println("Ingrese la coordenada y: ");
+                a[1] = sc.nextDouble();
+                System.out.println("Ingrese las coordenadas del segundo punto");
+                System.out.println("Ingrese la coordenada x: ");
+                b[0] = sc.nextDouble();
+                System.out.println("Ingrese la coordenada y: ");
+                b[1] = sc.nextDouble();
+                valorvalido = true;
+                if (a[0] == b[0] && a[1] == b[1]) {
+                    throw new ArithmeticException("Los puntos no pueden ser iguales");
+                }
+                ecuacionRecta(a, b);
+
+            } catch (ArithmeticException e) {
+                System.err.println(e.getMessage());
+                sc.nextLine();
+            } catch (InputMismatchException e) {
+                System.err.println("Ingresa valores double para las coordenadas de los puntos");
+                sc.nextLine();
+            }
+
+        }while (!valorvalido);
+        valorvalido = false;
         try {
             System.out.println("¿Desea calcular otra ecuación de la recta? ");
             System.out.println("Ingrese si o no");
@@ -49,8 +54,7 @@ public class Ecuacion_Recta {
         }catch (InputMismatchException e) {
             System.err.println(e.getMessage());
             sc.nextLine();
-        }while (!valorvalido);
-        valorvalido = false;
+        }
 
     }
     public static void ecuacionRecta ( double[] a, double[] b){
