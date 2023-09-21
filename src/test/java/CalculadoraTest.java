@@ -1,141 +1,130 @@
-import static org.junit.jupiter.api.Assertions.*;
+package org.example;
 
-import org.junit.jupiter.api.Test;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import static org.junit.jupiter.api.Assertions.*;
+import java.sql.SQLOutput;
+import java.util.Scanner;
 
-class CalculadoraTest {
-    @Test
-    void suma() {
-        assertEquals(0, Calculadora.suma(1,-1));
-        assertNotEquals(0, Calculadora.suma(1,1));
+public class SistemaDeEcuaciones {
+    public static void main(String[] args) {
+        System.out.println("Ingrese los valores de las variables de un sistema de ecuacion de la forma ax+by=c y dx+ey=f:");
+        ejecutar();
+    }
+    public static void ejecutar(){
+        double a = 0;
+        double b = 0;
+        double c = 0;
+        double d = 0;
+        double e = 0;
+        double f = 0;
+        double determinante = 0;
+        double x = 0;
+        double y = 0;
+        a = ingresarA(a);
+        b = ingresarB(b);
+        c = ingresarC(c);
+        d = ingresarD(d);
+        e = ingresarE(e);
+        f = ingresarF(f);
+        determinante = calculoDeterminante(a, b, c, d, e, f, determinante);
+        if(determinante != 0){
+            x = calculoSolucion1(b, c, e, f, determinante);
+            y = calculoSolucion2(a, f, c, d, determinante);
+            mostrar(x, y);
+        }
     }
 
-    @Test
-    void resta() {
-        assertEquals(11, Calculadora.resta(10,-1));
-        assertEquals(3, Calculadora.resta(5,2));
+    public static double ingresarA(double a){
+        try{
+        Scanner A=new Scanner(System.in);
+        System.out.println("Ingrese la variable a: ");
+        a = Double.parseDouble(A.nextLine());
+        return a;}
+        catch (NumberFormatException e){
+            System.out.println("El valor ingresado no es valido, ingrese otro valor: ");
+            return ingresarA(a);
+        }
     }
-    @Test
-    void multi() {
-        assertEquals(20, Calculadora.multi(10,2));
-        assertEquals(5, Calculadora.multi(10,0.5));
+    public static double ingresarB(double b){
+        try{
+        Scanner A=new Scanner(System.in);
+        System.out.println("Ingrese la variable b: ");
+        b = Double.parseDouble(A.nextLine());
+        return b;}
+        catch (NumberFormatException e){
+            System.out.println("El valor ingresado no es valido, ingrese otro valor: ");
+            return ingresarB(b);
+        }
     }
-    @Test
-    void divi() {
-        assertEquals(5, Calculadora.divi(10,2));
-        assertEquals(20, Calculadora.divi(10,0.5));
+    public static double ingresarC(double c){
+        try{
+        Scanner A=new Scanner(System.in);
+        System.out.println("Ingrese la variable c: ");
+        c = Double.parseDouble(A.nextLine());
+        return c;}
+        catch (NumberFormatException e){
+            System.out.println("El valor ingresado no es valido, ingrese otro valor: ");
+            return ingresarC(c);
+        }
+    }
+    public static double ingresarD(double d){
+        try{
+        Scanner D=new Scanner(System.in);
+        System.out.println("Ingrese la variable d: ");
+        d = Double.parseDouble(D.nextLine());
+        return d;}
+        catch (NumberFormatException e){
+            System.out.println("El valor ingresado no es valido, ingrese otro valor: ");
+            return ingresarD(d);
+        }
+        }
+
+    public static double ingresarE(double e) {
+        try {
+            Scanner E = new Scanner(System.in);
+            System.out.println("Ingrese la variable e: ");
+            e = Double.parseDouble(E.nextLine());
+            return e;
+        } catch (NumberFormatException ex) {
+            System.out.println("El valor ingresado no es valido, ingrese otro valor: ");
+            return ingresarE(e);
+        }
     }
 
-    @Test
-    void max() {
-        assertEquals(10, Calculadora.max(10,2));
-        assertNotEquals(10, Calculadora.max(11,10));
+    public static double ingresarF(double f){
+        try{
+        Scanner F=new Scanner(System.in);
+        System.out.println("Ingrese la variable f: ");
+        f = Double.parseDouble(F.nextLine());
+        return f;}
+        catch (NumberFormatException e){
+            System.out.println("El valor ingresado no es valido, ingrese otro valor: ");
+            return ingresarF(f);
+        }
     }
-    @Test
-    void min() {
-        assertEquals(2, Calculadora.min(10,2));
-        assertNotEquals(11, Calculadora.min(10,10));
-    }
-
-    @Test
-    void power() {
-        assertEquals(100, Calculadora.power(10,2));
-        assertEquals(0.5, Calculadora.power(2,-1));
-    }
-
-    @Test
-    void percentage() {
-        assertEquals(50, Calculadora.percentage(100,50));
-        assertEquals(2, Calculadora.percentage(100,2));
-    }
-    @Test
-      
-    void perimetroCuadrado() {
-        assertEquals(8, Calculadora.perimetroCuadrado(2));
-        assertNotEquals(8, Calculadora.perimetroCuadrado(3));
-    }
-
-    @Test
-    void areaCuadrado() {
-        assertEquals(4, Calculadora.areaCuadrado(2));
-        assertNotEquals(4, Calculadora.areaCuadrado(3));
-    }
-
-    @Test
-    void perimetroRectangulo() {
-        assertEquals(8, Calculadora.perimetroRectangulo(2, 2));
-        assertNotEquals(4, Calculadora.perimetroRectangulo(3, 3));
-    }
-
-    @Test
-    void areaRectangulo() {
-        assertEquals(4, Calculadora.areaRectangulo(2, 2));
-        assertNotEquals(4, Calculadora.areaRectangulo(3, 3));
-    }
-
-    @Test
-    void circunferenciaCirculo() {
-        assertEquals(Math.PI*2, Calculadora.circunferenciaCirculo(1));
-        assertNotEquals(Math.PI, Calculadora.circunferenciaCirculo(3));
-    }
-
-    @Test
-    void areaCirculo() {
-        assertEquals(Math.PI, Calculadora.areaCirculo(1));
-        assertNotEquals(Math.PI*2, Calculadora.areaCirculo(3));
-    }
-
-    @Test
-    void areaEsfera() {
-        assertEquals(Math.PI*4, Calculadora.areaEsfera(1));
-        assertNotEquals(Math.PI*2, Calculadora.areaEsfera(3));
-    }
-
-    @Test
-    void volumenEsfera() {
-        assertEquals((double) 4 /3*Math.PI, Calculadora.volumenEsfera(1));
-        assertNotEquals(Math.PI, Calculadora.volumenEsfera(2));
-    }
-
-    @Test
-    void areaCubo() {
-        assertEquals(24, Calculadora.areaCubo(2));
-        assertNotEquals(30, Calculadora.areaCubo(3));
-    }
-
-    @Test
-    void volumenCubo() {
-        assertEquals(8, Calculadora.volumenCubo(2));
-        assertNotEquals(10, Calculadora.volumenCubo(3));
-    }
-
-    @Test
-    void areaCono() {
-        assertEquals(24*Math.PI, Calculadora.areaCono(3,4));
-        assertNotEquals(30, Calculadora.areaCono(3,3));
-    }
-
-    @Test
-    void volumenCono() {
-        assertEquals(12*Math.PI, Calculadora.volumenCono(3,4));
-        assertNotEquals(10, Calculadora.volumenCono(3,3));
-    }
-
-    @Test
-    public void calcularCuadratica1Test() {
-        double x1 = Calculadora.calcularCuadratica1(0, 1.0, -3.0, 2.0, 1.0);
-        assertEquals(2.0, x1, 0.0001); // Verifica que el cálculo de la primera raíz sea correcto
-    }
-
-    @Test
-    public void calcularCuadratica2Test() {
-        double x2 = Calculadora.calcularCuadratica2(0, 1.0, -3.0, 2.0, 1.0);
-        assertEquals(1.0, x2, 0.0001); // Verifica que el cálculo de la segunda raíz sea correcto
-    }
+    public static double calculoDeterminante(double a, double b, double c, double d, double e, double f, double determinante){
+        determinante = a * e - b * d;
+        if (determinante != 0) {
+            return determinante;
+        }
+        else {
+            System.out.println("El sistema de ecuaciones no tiene solución única.");
+        }
 
 
+        return determinante;
+    }
+    public static double calculoSolucion1(double b, double c, double e, double f, double determinante){
+        double x = (c * e - b * f) / determinante;
 
+        return x;
+
+    }
+    public static double calculoSolucion2(double a, double f, double c, double d, double determinante){
+        double y = (a * f - c * d) / determinante;
+        return y;
+    }
+
+    public static void mostrar(double x, double y){
+        System.out.println("x= "+x);
+        System.out.println("y= "+y);
+    }
 }
-
