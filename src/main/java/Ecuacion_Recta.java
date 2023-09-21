@@ -7,6 +7,7 @@ public class Ecuacion_Recta {
         double[] a = new double[2];
         double[] b = new double[2];
         boolean valorvalido = false;
+        boolean valorvalido2=false;
         String respuesta;
         String entrada;
         do {
@@ -39,22 +40,26 @@ public class Ecuacion_Recta {
 
         }while (!valorvalido);
         valorvalido = false;
-        try {
-            System.out.println("¿Desea calcular otra ecuación de la recta? ");
-            System.out.println("Ingrese si o no");
-            respuesta = sc.next().toLowerCase();
-            if (respuesta.equals("si")) {
-                main(args);
-            } else if (respuesta.equals("no")) {
-                System.out.println("Hasta pronto!");
-                System.exit(0);
-            } else {
-                throw new InputMismatchException("Ingresa una respuesta valida");
+        do{
+            try {
+                System.out.println("¿Desea calcular otra ecuación de la recta? ");
+                System.out.println("Ingrese si o no");
+                respuesta = sc.next().toLowerCase();
+                if (respuesta.equals("si")) {
+                    main(args);
+                } else if (respuesta.equals("no")) {
+                    System.out.println("Hasta pronto!");
+                    System.exit(0);
+                } else {
+                    throw new InputMismatchException("Ingresa una respuesta valida");
+                }
+                valorvalido2 = true;
+            }catch (InputMismatchException e) {
+                System.err.println(e.getMessage());
+                sc.nextLine();
             }
-        }catch (InputMismatchException e) {
-            System.err.println(e.getMessage());
-            sc.nextLine();
-        }
+        }while(!valorvalido2);
+        valorvalido2 = false;
 
     }
     public static void ecuacionRecta ( double[] a, double[] b){
