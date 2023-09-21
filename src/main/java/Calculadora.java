@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import static java.lang.Math.sqrt;
 
@@ -180,7 +181,7 @@ public class Calculadora {
                     break;
 
                 case 9:
-                    System.out.println("Hasta pronto");
+                    menuPrincipal();
                     break;
 
                 default:
@@ -285,19 +286,23 @@ public class Calculadora {
     public static void menuPrincipal(){
         System.out.println("Que desea hacer");
         System.out.println("[1] Operaciones elementales");
-        System.out.println("[2] Calculo recta");
-        System.out.println("[3] Figuras]");
-        Scanner teclado = new Scanner(System.in);
-        int opcion = teclado.nextInt();
+        System.out.println("[2] Cálculo ecuación cuadrática");
+        System.out.println("[3] Cálculo figuras");
+        int opcion = pedirInt();
+        switchPrincipal(opcion);
+        menuPrincipal();
+    }
+    public static void switchPrincipal(int opcion){
         switch (opcion) {
             case 1:
-                menu();
+                ejecutar1();
                 break;
             case 2:
                 ejecutar();
                 break;
             case 3:
-                ejecutar1();
+                menu();
+                break;
             default:
                 System.out.println("Opcion no valida");
                 break;
@@ -343,7 +348,9 @@ public class Calculadora {
     public static double volumenCubo(double lado) {
         return lado * lado * lado;
     }
-
+    public static double areaCono(double radio, double altura) {
+        return Math.PI * radio * (radio + (sqrt(radio * radio + altura * altura)));
+    }
     public static double volumenCono(double radio, double altura) {
         return (Math.PI * altura * radio * radio) / 3;
     }
