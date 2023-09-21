@@ -1,5 +1,3 @@
-package org.example;
-
 import java.util.Scanner;
 
 public class Calculadora {
@@ -94,4 +92,4 @@ public class Calculadora {
 
 }
 
-}
+
