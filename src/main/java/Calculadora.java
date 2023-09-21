@@ -8,7 +8,7 @@ public class SistemaDeEcuaciones {
         System.out.println("Ingrese los valores de las variables de un sistema de ecuacion de la forma ax+by=c y dx+ey=f:");
         ejecutar();
     }
-    public static void ejecutar(){
+    public static void ejecutar3(){
         double a = 0;
         double b = 0;
         double c = 0;
@@ -18,9 +18,9 @@ public class SistemaDeEcuaciones {
         double determinante = 0;
         double x = 0;
         double y = 0;
-        a = ingresarA(a);
-        b = ingresarB(b);
-        c = ingresarC(c);
+        a = ingresarA1(a);
+        b = ingresarB1(b);
+        c = ingresarC1(c);
         d = ingresarD(d);
         e = ingresarE(e);
         f = ingresarF(f);
@@ -32,7 +32,7 @@ public class SistemaDeEcuaciones {
         }
     }
 
-    public static double ingresarA(double a){
+    public static double ingresarA1(double a){
         try{
         Scanner A=new Scanner(System.in);
         System.out.println("Ingrese la variable a: ");
@@ -40,10 +40,10 @@ public class SistemaDeEcuaciones {
         return a;}
         catch (NumberFormatException e){
             System.out.println("El valor ingresado no es valido, ingrese otro valor: ");
-            return ingresarA(a);
+            return ingresarA1(a);
         }
     }
-    public static double ingresarB(double b){
+    public static double ingresarB1(double b){
         try{
         Scanner A=new Scanner(System.in);
         System.out.println("Ingrese la variable b: ");
@@ -51,10 +51,10 @@ public class SistemaDeEcuaciones {
         return b;}
         catch (NumberFormatException e){
             System.out.println("El valor ingresado no es valido, ingrese otro valor: ");
-            return ingresarB(b);
+            return ingresarB1(b);
         }
     }
-    public static double ingresarC(double c){
+    public static double ingresarC1(double c){
         try{
         Scanner A=new Scanner(System.in);
         System.out.println("Ingrese la variable c: ");
@@ -62,7 +62,7 @@ public class SistemaDeEcuaciones {
         return c;}
         catch (NumberFormatException e){
             System.out.println("El valor ingresado no es valido, ingrese otro valor: ");
-            return ingresarC(c);
+            return ingresarC1(c);
         }
     }
     public static double ingresarD(double d){
