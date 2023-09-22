@@ -134,8 +134,19 @@ class CalculadoraTest {
         double x2 = Calculadora.calcularCuadratica2(0, 1.0, -3.0, 2.0, 1.0);
         assertEquals(1.0, x2, 0.0001); // Verifica que el cálculo de la segunda raíz sea correcto
     }
+    @Test
+    void ecuacionRecta() {
+        double[] a= new double[]{0, 2};
+        double[] b= new double[]{0, 1};
 
-
+        assertThrows( ArithmeticException.class, () -> Calculadora.validacionpuntos(a, b));
+    }
+    @Test
+    void ecuacionRecta2() {
+        double[] c= new double[]{3, 4};
+        double[] d= new double[]{5, 6};
+        assertNull( Calculadora.validacionpuntos(c, d));
+    }
 
 }
 

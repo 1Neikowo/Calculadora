@@ -284,12 +284,15 @@ public class Calculadora {
             }return null;
         }
     }
-
+//arriba bien
     public static void menuPrincipal(){
         System.out.println("Que desea hacer");
         System.out.println("[1] Operaciones elementales");
         System.out.println("[2] Cálculo ecuación cuadrática");
         System.out.println("[3] Cálculo figuras");
+        System.out.println("[4] Sistema ecuaciones lineales");
+        System.out.println("[5] Ecuación de la recta");
+        System.out.println("[6] Salir");
         int opcion = pedirInt();
         switchPrincipal(opcion);
         menuPrincipal();
@@ -300,11 +303,17 @@ public class Calculadora {
                 ejecutar1();
                 break;
             case 2:
-                ejecutar();
+                ejecutar2();
                 break;
             case 3:
                 menu();
                 break;
+            case 4:
+                ejecutar3();
+            case 5:
+                ejecutar();
+            case 6:
+                System.exit(0);
             default:
                 System.out.println("Opcion no valida");
                 break;
@@ -514,64 +523,208 @@ public class Calculadora {
 
     public static double ingresarA(double a){
         try{Scanner A=new Scanner(System.in);
-        System.out.println("Ingrese la variable a: ");
-        a = Double.parseDouble(A.nextLine());
-        while (a == 0){
-            System.out.println("El valor de a no puede ser 0, ingrese otro valor: ");
+            System.out.println("Ingrese la variable a: ");
             a = Double.parseDouble(A.nextLine());
-        }
-
-        return a;}
+            while (a == 0){
+                System.out.println("El valor de a no puede ser 0, ingrese otro valor: ");
+                a = Double.parseDouble(A.nextLine());
+            }
+            return a;}
         catch (NumberFormatException e){
             System.out.println("El valor ingresado no es valido, ingrese otro valor: ");
             return ingresarA(a);
         }
     }
     public static double ingresarB(double b){
-        try{
-        Scanner A=new Scanner(System.in);
-        System.out.println("Ingrese la variable b: ");
-        b = Double.parseDouble(A.nextLine());
-        
         try{Scanner B=new Scanner(System.in);
-        System.out.println("Ingrese la variable b: ");
-        b = Double.parseDouble(B.nextLine());
-
-        return b;}
+            System.out.println("Ingrese la variable b: ");
+            b = Double.parseDouble(B.nextLine());
+            return b;}
         catch (NumberFormatException e){
             System.out.println("El valor ingresado no es valido, ingrese otro valor: ");
             return ingresarB(b);
         }
     }
     public static double ingresarC(double c){
-
-        try{
-        Scanner A=new Scanner(System.in);
-        System.out.println("Ingrese la variable c: ");
-        c = Double.parseDouble(A.nextLine());
-
         try{Scanner C=new Scanner(System.in);
-        System.out.println("Ingrese la variable c: ");
-        c = Double.parseDouble(C.nextLine());
-
-        return c;}
+            System.out.println("Ingrese la variable c: ");
+            c = Double.parseDouble(C.nextLine());
+            return c;}
         catch (NumberFormatException e){
             System.out.println("El valor ingresado no es valido, ingrese otro valor: ");
             return ingresarC(c);
         }
     }
+    public static double cuadratica(double a, double b, double c){
+        double discriminante = b * b - 4 * a * c;
+        if(discriminante < 0){
+            System.out.println("El discriminante es menor que 0, por lo cual la ecuacion no tiene soluciones en los reales.");
+        }
+        else if(discriminante == 0){
+            System.out.println("El discriminante es igual a 0, por lo cual la ecuacion tiene 1 solucion en los reales.");
+        }
+        else if(discriminante > 0){
+            System.out.println("El discriminante es mayor que 0, por lo cual la ecuacion tiene 2 soluciones en los reales.");
+        }
+        return discriminante;
 
+    }
+    public static double calcularCuadratica1(double x1, double a, double b, double c, double discriminante){
+        x1=(-b + Math.sqrt(discriminante)) / (2 * a);
+        return x1;
+    }
+    public static double calcularCuadratica2(double x2, double a, double b, double c, double discriminante){
+        x2=(-b - Math.sqrt(discriminante)) / (2 * a);
+        return x2;
+    }
+    public static void mostrarResultados(double x1, double x2){
+        System.out.println("La primera raiz de la ecuacion es: " + x1);
+        System.out.println("La segunda raiz de la ecuacion es: " + x2);
+    }
+    public static void mostrarUnResultado(double x1){
+        System.out.println("La unica raiz de la ecuacion es: " + x1);
+    }
+    public static void ejecutar(){
+        Scanner sc = new Scanner(System.in);
+        double[] a = new double[2];
+        double[] b = new double[2];
+        boolean valorvalido = false;
+        boolean valorvalido2=false;
+        String respuesta;
+        String entrada;
+        do {
+            System.out.println("Bienvenido/a a la Calculadora de Ecuaciones de Recta");
+            try {
+
+                System.out.println("Ingrese las coordenadas del primer punto");
+                System.out.println("Ingrese la coordenada x: ");
+                a[0] = sc.nextDouble();
+                System.out.println("Ingrese la coordenada y: ");
+                a[1] = sc.nextDouble();
+                System.out.println("Ingrese las coordenadas del segundo punto");
+                System.out.println("Ingrese la coordenada x: ");
+                b[0] = sc.nextDouble();
+                System.out.println("Ingrese la coordenada y: ");
+                b[1] = sc.nextDouble();
+                validacionpuntos( a,  b);
+                valorvalido = true;
+                ecuacionRecta(a, b);
+
+            } catch (ArithmeticException e) {
+                System.err.println(e.getMessage());
+                sc.nextLine();
+            } catch (InputMismatchException e) {
+                System.err.println("Ingresa valores double para las coordenadas de los puntos");
+                sc.nextLine();
+            }
+
+        }while (!valorvalido);
+        valorvalido = false;
+        do{
+            try {
+                System.out.println("¿Desea calcular otra ecuación de la recta? ");
+                System.out.println("Ingrese si o no");
+                respuesta = sc.next().toLowerCase();
+                if (respuesta.equals("si")) {
+                    ejecutar();
+                } else if (respuesta.equals("no")) {
+                    menuPrincipal();
+                } else {
+                    throw new InputMismatchException("Ingresa una respuesta valida");
+                }
+                valorvalido2 = true;
+            }catch (InputMismatchException e) {
+                System.err.println(e.getMessage());
+                sc.nextLine();
+            }
+        }while(!valorvalido2);
+        valorvalido2 = false;
+
+
+    }
+
+    public static void ecuacionRecta ( double[] a, double[] b){
+        double m = (b[1] - a[1]) / (b[0] - a[0]);
+        double coeficiente = m * (-a[0]) + a[1];
+        System.out.println("La ecuación de la recta es: Y = " + m + "x +" + coeficiente);
+
+    }
+    public static ArithmeticException validacionpuntos(double [] a, double[] b){
+        if (a[0] == b[0]) {
+            throw new ArithmeticException("Los puntos no pueden ser iguales");
+        }
+        return null;
+    }
+    public static void ejecutar3(){
+        System.out.println("Ingrese los valores de las variables de un sistema de ecuacion de la forma ax+by=c y dx+ey=f:");
+        double a = 0;
+        double b = 0;
+        double c = 0;
+        double d = 0;
+        double e = 0;
+        double f = 0;
+        double determinante = 0;
+        double x = 0;
+        double y = 0;
+        a = ingresarA1(a);
+        b = ingresarB1(b);
+        c = ingresarC1(c);
+        d = ingresarD(d);
+        e = ingresarE(e);
+        f = ingresarF(f);
+        determinante = calculoDeterminante(a, b, c, d, e, f, determinante);
+        if(determinante != 0){
+            x = calculoSolucion1(b, c, e, f, determinante);
+            y = calculoSolucion2(a, f, c, d, determinante);
+            mostrar(x, y);
+        }
+        menuPrincipal();
+    }
+
+    public static double ingresarA1(double a){
+        try{
+            Scanner A=new Scanner(System.in);
+            System.out.println("Ingrese la variable a: ");
+            a = Double.parseDouble(A.nextLine());
+            return a;}
+        catch (NumberFormatException e){
+            System.out.println("El valor ingresado no es valido, ingrese otro valor: ");
+            return ingresarA1(a);
+        }
+    }
+    public static double ingresarB1(double b){
+        try{
+            Scanner A=new Scanner(System.in);
+            System.out.println("Ingrese la variable b: ");
+            b = Double.parseDouble(A.nextLine());
+            return b;}
+        catch (NumberFormatException e){
+            System.out.println("El valor ingresado no es valido, ingrese otro valor: ");
+            return ingresarB1(b);
+        }
+    }
+    public static double ingresarC1(double c){
+        try{
+            Scanner A=new Scanner(System.in);
+            System.out.println("Ingrese la variable c: ");
+            c = Double.parseDouble(A.nextLine());
+            return c;}
+        catch (NumberFormatException e){
+            System.out.println("El valor ingresado no es valido, ingrese otro valor: ");
+            return ingresarC1(c);
+        }
+    }
     public static double ingresarD(double d){
         try{
-        Scanner D=new Scanner(System.in);
-        System.out.println("Ingrese la variable d: ");
-        d = Double.parseDouble(D.nextLine());
-        return d;}
+            Scanner D=new Scanner(System.in);
+            System.out.println("Ingrese la variable d: ");
+            d = Double.parseDouble(D.nextLine());
+            return d;}
         catch (NumberFormatException e){
             System.out.println("El valor ingresado no es valido, ingrese otro valor: ");
             return ingresarD(d);
         }
-        }
+    }
 
     public static double ingresarE(double e) {
         try {
@@ -587,10 +740,10 @@ public class Calculadora {
 
     public static double ingresarF(double f){
         try{
-        Scanner F=new Scanner(System.in);
-        System.out.println("Ingrese la variable f: ");
-        f = Double.parseDouble(F.nextLine());
-        return f;}
+            Scanner F=new Scanner(System.in);
+            System.out.println("Ingrese la variable f: ");
+            f = Double.parseDouble(F.nextLine());
+            return f;}
         catch (NumberFormatException e){
             System.out.println("El valor ingresado no es valido, ingrese otro valor: ");
             return ingresarF(f);
@@ -605,35 +758,6 @@ public class Calculadora {
             System.out.println("El sistema de ecuaciones no tiene solución única.");
         }
 
-    public static double cuadratica(double a, double b, double c){
-        double discriminante = b * b - 4 * a * c;
-        if(discriminante < 0){
-            System.out.println("El discriminante es menor que 0, por lo cual la ecuacion no tiene soluciones en los reales.");
-        }
-        else if(discriminante == 0){
-            System.out.println("El discriminante es igual a 0, por lo cual la ecuacion tiene 1 solucion en los reales.");
-        }
-        else if(discriminante > 0){
-            System.out.println("El discriminante es mayor que 0, por lo cual la ecuacion tiene 2 soluciones en los reales.");
-        }
-    return discriminante;
-
-    }
-    public static double calcularCuadratica1(double x1, double a, double b, double c, double discriminante){
-        x1=(-b + Math.sqrt(discriminante)) / (2 * a);
-        return x1;
-    }
-    public static double calcularCuadratica2(double x2, double a, double b, double c, double discriminante){
-        x2=(-b - Math.sqrt(discriminante)) / (2 * a);
-        return x2;
-    }
-    public static void mostrarResultados(double x1, double x2){
-    System.out.println("La primera raiz de la ecuacion es: " + x1);
-    System.out.println("La segunda raiz de la ecuacion es: " + x2);
-    }
-    public static void mostrarUnResultado(double x1){
-        System.out.println("La unica raiz de la ecuacion es: " + x1);
-    }
 
         return determinante;
     }
@@ -652,6 +776,8 @@ public class Calculadora {
         System.out.println("x= "+x);
         System.out.println("y= "+y);
     }
+
+
 }
 
 
